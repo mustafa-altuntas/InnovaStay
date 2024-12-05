@@ -11,7 +11,7 @@ namespace InnovaStay.Data.Abstract
     {
         Task<TEntity?> GetByIdAsync(int id); // Belirli bir varlığı getirir.
         Task<IEnumerable<TEntity>> GetAllAsync(); // Tüm varlıkları getirir.
-        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate); // Koşula göre veri getirir.
+        Task<IEnumerable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate); // Koşula göre veri getirir.
 
         Task AddAsync(TEntity entity); // Yeni varlık ekler.
         Task AddRangeAsync(IEnumerable<TEntity> entities); // Birden fazla varlık ekler.
