@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InnovaStay.Entity.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InnovaStay.Data.Abstract
 {
-    public interface IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class,IBaseEntity
     {
         Task<TEntity?> GetByIdAsync(int id); // Belirli bir varlığı getirir.
         Task<IEnumerable<TEntity>> GetAllAsync(); // Tüm varlıkları getirir.
