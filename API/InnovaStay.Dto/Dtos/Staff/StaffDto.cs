@@ -1,15 +1,13 @@
-﻿using InnovaStay.Entity.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InnovaStay.Entity.Concrete
+namespace InnovaStay.Dto.Dtos.Staff
 {
-    public class Staff : IBaseEntity
+    public class StaffDto
     {
-        public int Id { get; set; }
         public int StaffID { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }

@@ -1,15 +1,13 @@
-﻿using InnovaStay.Entity.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InnovaStay.Entity.Concrete
+namespace InnovaStay.Dto.Dtos.Testimonial
 {
-    public class Testimonial : IBaseEntity
+    public class TestimonialDto
     {
-        public int Id { get; set; }
         public int TestimonialID { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }

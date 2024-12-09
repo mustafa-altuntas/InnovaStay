@@ -1,15 +1,13 @@
-﻿using InnovaStay.Entity.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InnovaStay.Entity.Concrete
+namespace InnovaStay.Dto.Dtos.Subscribe
 {
-    public class Subscribe : IBaseEntity
+    public class SubscribeDto
     {
-        public int Id { get; set; }
         public int SubscribeID { get; set; }
         public string Mail { get; set; }
     }

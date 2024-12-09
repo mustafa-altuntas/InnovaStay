@@ -1,5 +1,6 @@
 ﻿using InnovaStay.Data.Abstract;
 using InnovaStay.Data.Concrete;
+using InnovaStay.Entity.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InnovaStay.Data.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class,IBaseEntity
     {
         private readonly DbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
