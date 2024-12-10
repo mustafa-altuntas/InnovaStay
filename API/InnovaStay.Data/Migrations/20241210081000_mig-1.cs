@@ -14,7 +14,7 @@ namespace InnovaStay.Data.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    RoomID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoomNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoomCoverImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -27,14 +27,14 @@ namespace InnovaStay.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rooms", x => x.RoomID);
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
                 {
-                    ServiceID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceIcon = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -42,14 +42,14 @@ namespace InnovaStay.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Services", x => x.ServiceID);
+                    table.PrimaryKey("PK_Services", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Staffs",
                 columns: table => new
                 {
-                    StaffID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -59,27 +59,27 @@ namespace InnovaStay.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Staffs", x => x.StaffID);
+                    table.PrimaryKey("PK_Staffs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Subscribes",
                 columns: table => new
                 {
-                    SubscribeID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Mail = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Subscribes", x => x.SubscribeID);
+                    table.PrimaryKey("PK_Subscribes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Testimonials",
                 columns: table => new
                 {
-                    TestimonialID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -88,7 +88,7 @@ namespace InnovaStay.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Testimonials", x => x.TestimonialID);
+                    table.PrimaryKey("PK_Testimonials", x => x.Id);
                 });
         }
 
