@@ -58,7 +58,12 @@ namespace InnovaStay.Data.Repositories
 
         public async Task<TEntity?> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            var value = await _dbSet.FindAsync(id);
+            if (value != null)
+            {
+                _dbSet.Entry(value).State = EntityState.Detached;
+            }
+            return value;
         }
 
         public void Remove(TEntity entity)
@@ -76,7 +81,7 @@ namespace InnovaStay.Data.Repositories
 
         public void Update(TEntity entity)
         {
-            _dbSet.Update(entity);
+            _dbSet.Entry(entity).State = EntityState.Modified;
             _dbContext.SaveChanges();
         }
     }
