@@ -10,7 +10,6 @@ namespace InnovaStay.Entity.Concrete
     public class Subscribe : IBaseEntity
     {
         public int Id { get; set; }
-        public int SubscribeID { get; set; }
         public string Mail { get; set; }
     }
 }
