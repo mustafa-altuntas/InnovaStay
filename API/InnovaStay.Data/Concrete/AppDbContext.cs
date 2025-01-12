@@ -12,7 +12,7 @@ namespace InnovaStay.Data.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-EL2OSRJ\\SQLEXPRESS;Initial Catalog=InnovaStayDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            //optionsBuilder.UseSqlServer("Data Source=DESKTOP-EL2OSRJ\\SQLEXPRESS;Initial Catalog=InnovaStayDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
         public DbSet<Room> Rooms { get; set; }
