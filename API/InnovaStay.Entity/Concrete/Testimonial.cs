@@ -10,7 +10,6 @@ namespace InnovaStay.Entity.Concrete
     public class Testimonial : IBaseEntity
     {
         public int Id { get; set; }
-        public int TestimonialID { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

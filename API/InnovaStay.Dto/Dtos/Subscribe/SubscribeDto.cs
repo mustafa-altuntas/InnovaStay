@@ -8,7 +8,7 @@ namespace InnovaStay.Dto.Dtos.Subscribe
 {
     public class SubscribeDto
     {
-        public int SubscribeID { get; set; }
+        public int Id { get; set; }
         public string Mail { get; set; }
     }
 }

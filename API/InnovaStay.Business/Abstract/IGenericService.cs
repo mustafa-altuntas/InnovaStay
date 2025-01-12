@@ -13,8 +13,8 @@ namespace InnovaStay.Business.Abstract
         Task<TDto?> GetByIdAsync(int id);
         Task<IEnumerable<TDto>> GetAllAsync();
         Task AddAsync(TDto dto);
-        void Update(TDto dto);
-        void Remove(TDto dto);
+        void Update(TDto dto,int id);
+        void Remove(int id);
 
 
     }

@@ -1,6 +1,39 @@
+using InnovaStay.Api.Extension;
+using InnovaStay.Business.Abstract;
+using InnovaStay.Business.Concrete;
+using InnovaStay.Data;
+using InnovaStay.Data.Abstract;
+using InnovaStay.Data.Concrete;
+using InnovaStay.Data.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
+
+
+
+builder.Services.AddScoped<IRoomRepository,RoomRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+builder.Services.AddScoped<ISubscribeRepository, SubscribeRepository>();
+builder.Services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
+builder.Services.AddScoped<IStaffService, StaffService>();
+builder.Services.AddScoped<ISubscribeService, SubscribeService>();
+builder.Services.AddScoped<ITestimonialService, TestimonialService>();
+
+
+// Register Layer
+builder.Services.AddDataService(builder.Configuration);
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,6 +50,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Use Global Exception
+app.ExceptionHandler();
 
 app.UseAuthorization();
 

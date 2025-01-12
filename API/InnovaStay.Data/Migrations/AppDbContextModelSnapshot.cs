@@ -23,11 +23,11 @@ namespace InnovaStay.Data.Migrations
 
             modelBuilder.Entity("InnovaStay.Entity.Concrete.Room", b =>
                 {
-                    b.Property<int>("RoomID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BathCount")
                         .HasColumnType("int");
@@ -58,18 +58,18 @@ namespace InnovaStay.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RoomID");
+                    b.HasKey("Id");
 
                     b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("InnovaStay.Entity.Concrete.Service", b =>
                 {
-                    b.Property<int>("ServiceID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -83,18 +83,18 @@ namespace InnovaStay.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ServiceID");
+                    b.HasKey("Id");
 
                     b.ToTable("Services");
                 });
 
             modelBuilder.Entity("InnovaStay.Entity.Concrete.Staff", b =>
                 {
-                    b.Property<int>("StaffID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StaffID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -116,35 +116,35 @@ namespace InnovaStay.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("StaffID");
+                    b.HasKey("Id");
 
                     b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("InnovaStay.Entity.Concrete.Subscribe", b =>
                 {
-                    b.Property<int>("SubscribeID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscribeID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Mail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SubscribeID");
+                    b.HasKey("Id");
 
                     b.ToTable("Subscribes");
                 });
 
             modelBuilder.Entity("InnovaStay.Entity.Concrete.Testimonial", b =>
                 {
-                    b.Property<int>("TestimonialID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TestimonialID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -162,7 +162,7 @@ namespace InnovaStay.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TestimonialID");
+                    b.HasKey("Id");
 
                     b.ToTable("Testimonials");
                 });

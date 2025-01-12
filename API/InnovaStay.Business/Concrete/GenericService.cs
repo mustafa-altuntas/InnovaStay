@@ -37,32 +37,29 @@ namespace InnovaStay.Business.Concrete
             return ObjectMapper.Mapper.Map<TDto>(value);
         }
 
-        public void Remove(TDto dto)
+        public void Remove(int id)
         {
-            if (dto == null)
-                throw new ArgumentNullException(nameof(dto));
+            var isExistEntity = _repository.GetByIdAsync(id).Result;
 
-            TEntity value = ObjectMapper.Mapper.Map<TEntity>(dto);
-            var entity = _repository.GetByIdAsync(value.Id).Result;
+            if (isExistEntity == null)
+                throw new InvalidOperationException($"Entity with Id '{id}' not found.");
 
-            if (entity == null)
-                throw new InvalidOperationException($"Entity with Id '{value.Id}' not found.");
-
-            _repository.Remove(entity);
+            _repository.Remove(isExistEntity);
         }
 
-        public void Update(TDto dto)
+        public void Update(TDto dto,int id)
         {
             if (dto == null)
                 throw new ArgumentNullException(nameof(dto));
 
+            var isExistEntity = _repository.GetByIdAsync(id).Result;
+
+            if (isExistEntity == null)
+                throw new InvalidOperationException($"Entity with Id '{id}' not found.");
+
+            
             TEntity value = ObjectMapper.Mapper.Map<TEntity>(dto);
-            var entity = _repository.GetByIdAsync(value.Id).Result;
-
-            if (entity == null)
-                throw new InvalidOperationException($"Entity with Id '{value.Id}' not found.");
-
-            _repository.Update(entity);
+            _repository.Update(value);
 
         }
     }
