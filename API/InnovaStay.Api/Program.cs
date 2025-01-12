@@ -5,23 +5,18 @@ using InnovaStay.Data;
 using InnovaStay.Data.Abstract;
 using InnovaStay.Data.Concrete;
 using InnovaStay.Data.Repositories;
+using InnovaStay.Entity.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// Register Layer
+builder.Services.AddDataService(builder.Configuration);
 
-builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+
 builder.Services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
-
-
-
-builder.Services.AddScoped<IRoomRepository,RoomRepository>();
-builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
-builder.Services.AddScoped<IStaffRepository, StaffRepository>();
-builder.Services.AddScoped<ISubscribeRepository, SubscribeRepository>();
-builder.Services.AddScoped<ITestimonialRepository, TestimonialRepository>();
 
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
@@ -30,8 +25,7 @@ builder.Services.AddScoped<ISubscribeService, SubscribeService>();
 builder.Services.AddScoped<ITestimonialService, TestimonialService>();
 
 
-// Register Layer
-builder.Services.AddDataService(builder.Configuration);
+
 
 
 
