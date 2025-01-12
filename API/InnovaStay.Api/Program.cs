@@ -1,5 +1,7 @@
+using InnovaStay.Api.Extension;
 using InnovaStay.Business.Abstract;
 using InnovaStay.Business.Concrete;
+using InnovaStay.Data;
 using InnovaStay.Data.Abstract;
 using InnovaStay.Data.Concrete;
 using InnovaStay.Data.Repositories;
@@ -28,6 +30,9 @@ builder.Services.AddScoped<ISubscribeService, SubscribeService>();
 builder.Services.AddScoped<ITestimonialService, TestimonialService>();
 
 
+// Register Layer
+builder.Services.AddDataService(builder.Configuration);
+
 
 
 builder.Services.AddControllers();
@@ -45,6 +50,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Use Global Exception
+app.ExceptionHandler();
 
 app.UseAuthorization();
 
