@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+@await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/HeadPartial.cshtml")
+<body>
+    @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/PreloaderPartial.cshtml")
+    <div id="main-wrapper">
+        @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/NavbarPartial.cshtml")
+        @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/SidebarPartial.cshtml")
+
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                @RenderBody()
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/FooterPartial.cshtml")
+
+    </div>
+    @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/ScriptsPartial.cshtml")
+
+
+</body>
+
+</html>
+
