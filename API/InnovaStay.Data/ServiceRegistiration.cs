@@ -1,4 +1,6 @@
-﻿using InnovaStay.Data.Concrete;
+﻿using InnovaStay.Data.Abstract;
+using InnovaStay.Data.Concrete;
+using InnovaStay.Data.Repositories;
 using InnovaStay.Entity.Constant;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,16 @@ namespace InnovaStay.Data
             {
                 opts.UseNpgsql(configuration.GetConnectionString(AppsettingConstants.PostgreDb));
             });
+
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IServiceRepository, ServiceRepository>();
+            services.AddScoped<IStaffRepository, StaffRepository>();
+            services.AddScoped<ISubscribeRepository, SubscribeRepository>();
+            services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+
         }
     }
 }
