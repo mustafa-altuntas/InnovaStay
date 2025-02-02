@@ -12,6 +12,10 @@ namespace InnovaStay.Business.Exceptions
         {
         }
 
+        public EntityNotFoundException(int id): base($"'{id}' Id li varlık bulunamadı.")
+        {
+        }
+
         public EntityNotFoundException(string? message) : base(message)
         {
         }

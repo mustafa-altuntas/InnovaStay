@@ -34,25 +34,29 @@ namespace InnovaStay.Api.Controllers
 
         // POST api/Testimonial
         [HttpPost]
-        public async Task Create([FromBody] TestimonialDto dto)
+        public async Task<IActionResult> Create([FromBody] TestimonialDto dto)
         {
-            await _service.AddAsync(dto);
+            var values = await _service.AddAsync(dto);
+            return Ok(values);
+
         }
 
         // PUT api/Testimonial/5
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] TestimonialDto dto)
         {
-            _service.Update(dto,id);
-            return Ok("Güncelleme Başarılı!");
+            var values = _service.Update(dto, id);
+            return Ok(values);
+
         }
 
         // DELETE api/Testimonial/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _service.Remove(id);
-            return Ok("Silme Başarılı!");
+            var values = _service.Remove(id);
+            return Ok(values);
+
         }
     }
 }

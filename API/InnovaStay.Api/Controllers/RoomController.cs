@@ -34,25 +34,29 @@ namespace InnovaStay.Api.Controllers
 
         // POST api/Room
         [HttpPost]
-        public async Task Create([FromBody] RoomDto dto)
+        public async Task<IActionResult> Create([FromBody] RoomDto dto)
         {
-            await _service.AddAsync(dto);
+            var values = await _service.AddAsync(dto);
+            return Ok(values);
+
         }
 
         // PUT api/Room/5
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] RoomDto dto)
         {
-            _service.Update(dto,id);
-            return Ok("Güncelleme Başarılı!");
+            var values = _service.Update(dto, id);
+            return Ok(values);
+
         }
 
         // DELETE api/Room/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _service.Remove(id);
-            return Ok("Silme Başarılı!");
+            var values = _service.Remove(id);
+            return Ok(values);
+
         }
     }
 }

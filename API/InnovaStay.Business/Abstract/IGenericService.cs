@@ -1,20 +1,15 @@
-﻿using InnovaStay.Entity.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InnovaStay.Dto.Dtos;
+using InnovaStay.Entity.Abstract;
 
 namespace InnovaStay.Business.Abstract
 {
     public interface IGenericService<TDto,TEntity> where TDto : class where TEntity : class,IBaseEntity
     {
-        Task<TDto?> GetByIdAsync(int id);
-        Task<IEnumerable<TDto>> GetAllAsync();
-        Task AddAsync(TDto dto);
-        void Update(TDto dto,int id);
-        void Remove(int id);
+        Task<ResponseDto<TDto>?> GetByIdAsync(int id);
+        Task<ResponseDto<IEnumerable<TDto>>> GetAllAsync();
+        Task<ResponseDto<NoDataDto>> AddAsync(TDto dto);
+        ResponseDto<NoDataDto> Update(TDto dto,int id);
+        ResponseDto<NoDataDto> Remove(int id);
 
 
     }

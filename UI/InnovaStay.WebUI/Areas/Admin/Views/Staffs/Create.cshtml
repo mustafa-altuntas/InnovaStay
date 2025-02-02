@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
+}
+@model CreateStaffVM
+
+
+
+@section Header {
+    @* <link href="~/adminweb/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet"> *@
+}
+
+@section Scripts {
+    @*
+        <script src="~/adminweb/plugins/tables/js/jquery.dataTables.min.js"></script>
+    *@
+
+}
+
+
+
+
+<div class="card-body">
+    <h4 class="card-title">Vertical Form</h4>
+    <div class="basic-form">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="SocialMedia1"></label>
+                    <input asp-for="SocialMedia1" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="SocialMedia2"></label>
+                    <input asp-for="SocialMedia2" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="SocialMedia3"></label>
+                    <input asp-for="SocialMedia3" class="form-control">
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-dark">Kaydet</button>
+        </form>
+    </div>
+</div>

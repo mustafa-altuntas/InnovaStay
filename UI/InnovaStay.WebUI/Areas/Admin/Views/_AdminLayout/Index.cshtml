@@ -4,8 +4,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
-@await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/HeadPartial.cshtml")
+<head>
+
+    @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/HeadPartial.cshtml")
+    @await RenderSectionAsync("Header", required: false)
+
+</head>
+
 <body>
+
+
+
     @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/PreloaderPartial.cshtml")
     <div id="main-wrapper">
         @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/NavbarPartial.cshtml")
@@ -32,6 +41,44 @@
     </div>
     @await Html.PartialAsync("~/Areas/Admin/Views/_AdminLayout/ScriptsPartial.cshtml")
 
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            toastr["success"](`@TempData["SuccessMessage"]`)
+        </script>
+
+    }
+    @if (TempData["FailMessage"] != null)
+    {
+        <script>
+            toastr["error"](`@TempData["FailMessage"]`)
+        </script>
+
+    }
+    <script>
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "1000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
 
 </body>
 

@@ -1,4 +1,5 @@
 ﻿using InnovaStay.Business.Exceptions;
+using InnovaStay.Dto.Dtos;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net.Mime;
 
@@ -20,9 +21,11 @@ namespace InnovaStay.Api.Extension
                         _ => 500
                     };
 
+                    var result = ResponseDto<NoDataDto>.Fail(exceptionHandlerFactory.Error.Message, statusCode);
+
                     context.Response.ContentType = MediaTypeNames.Application.Json;
                     context.Response.StatusCode = statusCode;
-                    await context.Response.WriteAsync(exceptionHandlerFactory.Error.Message);
+                    await context.Response.WriteAsJsonAsync(result);
 
 
 

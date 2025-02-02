@@ -16,12 +16,13 @@ namespace InnovaStay.Api.Controllers
             _service = service;
         }
 
+
         // GET: api/Staff
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var values = await _service.GetAllAsync();
-            return Ok(values);
+            return StatusCode(values.StatusCode,values);
         }
 
         // GET api/Staff/5
@@ -34,25 +35,29 @@ namespace InnovaStay.Api.Controllers
 
         // POST api/Staff
         [HttpPost]
-        public async Task Create([FromBody] StaffDto dto)
+        public async Task<IActionResult> Create([FromBody] StaffDto dto)
         {
-            await _service.AddAsync(dto);
+            var values = await _service.AddAsync(dto);
+            return Ok(values);
+
         }
 
         // PUT api/Staff/5
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] StaffDto dto)
         {
-            _service.Update(dto,id);
-            return Ok("Güncelleme Başarılı!");
+            var values = _service.Update(dto, id);
+            return Ok(values);
+
         }
 
         // DELETE api/Staff/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _service.Remove(id);
-            return Ok("Silme Başarılı!");
+            var values = _service.Remove(id);
+            return Ok(values);
+
         }
     }
 }

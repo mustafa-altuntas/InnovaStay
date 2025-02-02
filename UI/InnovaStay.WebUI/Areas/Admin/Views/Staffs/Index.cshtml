@@ -1,8 +1,103 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
 }
+@model List<StaffVM>
 
-<h1>Index</h1>
+
+
+
+@section Header {
+    @* <link href="~/adminweb/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet"> *@
+
+}
+
+@section Scripts {
+
+    @*     <script src="~/adminweb/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="~/adminweb/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/adminweb/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+ *@
+    @*
+    <script>
+        $(document).ready(function () {
+            // DataTable'ı başlatıyoruz
+            $('#myTable').DataTable({
+                "paging": true, // Sayfalama
+                "searching": true, // Arama
+                "ordering": true, // Sıralama
+                "info": true // Bilgi gösterimi
+            });
+        });
+    </script> *@
+
+}
+
+
+
+
+
+<h4 class="card-title">Data Table</h4>
+<a href="/Admin/Staffs/Create" class="btn mb-3 btn-primary text-white">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Yeni Personel Oluştur
+</a>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped verticle-middle">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Title</td>
+                    <td>
+                        <div class="d-flex ">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Sil">
+                                <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/edit.png" />
+                            </a>
+                            <a class="ml-3" href="#" data-toggle="tooltip" data-placement="top" title="Güncelle">
+                                <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/bin.png" />
+                            </a>
+                            <a class="ml-3" href="#" data-toggle="tooltip" data-placement="top" title="Detay">
+                                <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/file-1.png" />
+                            </a>
+                        </div>
+                    </td>
+
+
+
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>İşlemler</th>
+
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+
+
+
+
+
 

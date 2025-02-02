@@ -1,5 +1,6 @@
 ﻿using InnovaStay.Data.Abstract;
 using InnovaStay.Data.Concrete;
+using InnovaStay.Data.Extension;
 using InnovaStay.Data.Repositories;
 using InnovaStay.Entity.Constant;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace InnovaStay.Data
             {
                 opts.UseNpgsql(configuration.GetConnectionString(AppsettingConstants.PostgreDb));
             });
+
+
+            
+
+            ModelBuilderSeedDataExtensions.InitialData(services.BuildServiceProvider().GetService<AppDbContext>());
 
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

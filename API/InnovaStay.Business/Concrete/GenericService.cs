@@ -1,12 +1,9 @@
 ﻿using InnovaStay.Business.Abstract;
+using InnovaStay.Business.Exceptions;
 using InnovaStay.Business.Mappings;
 using InnovaStay.Data.Abstract;
+using InnovaStay.Dto.Dtos;
 using InnovaStay.Entity.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InnovaStay.Business.Concrete
 {
@@ -19,35 +16,46 @@ namespace InnovaStay.Business.Concrete
             _repository = repository;
         }
 
-        public async Task AddAsync(TDto dto)
+        public async Task<ResponseDto<NoDataDto>> AddAsync(TDto dto)
         {
             var entity = ObjectMapper.Mapper.Map<TEntity>(dto);
             await _repository.AddAsync(entity);
+            return ResponseDto<NoDataDto>.SuccessNoData(201);
         }
 
-        public async Task<IEnumerable<TDto>> GetAllAsync()
+        public async Task<ResponseDto<IEnumerable<TDto>>> GetAllAsync()
         {
             var values = await _repository.GetAllAsync();
-            return ObjectMapper.Mapper.Map<List<TDto>>(values);
+            var data = ObjectMapper.Mapper.Map<List<TDto>>(values);
+            return ResponseDto<IEnumerable<TDto>>.Success(data,200);
+
         }
 
-        public async Task<TDto?> GetByIdAsync(int id)
+        public async Task<ResponseDto<TDto>?> GetByIdAsync(int id)
         {
-            var value = await _repository.GetByIdAsync(id);
-            return ObjectMapper.Mapper.Map<TDto>(value);
+            var isExistEntity = await _repository.GetByIdAsync(id);
+            if (isExistEntity == null)
+                throw new EntityNotFoundException(id);
+
+            var data = ObjectMapper.Mapper.Map<TDto>(isExistEntity);
+            return ResponseDto<TDto>.Success(data, 200);
+
         }
 
-        public void Remove(int id)
+        public ResponseDto<NoDataDto> Remove(int id)
         {
             var isExistEntity = _repository.GetByIdAsync(id).Result;
 
             if (isExistEntity == null)
-                throw new InvalidOperationException($"Entity with Id '{id}' not found.");
+                throw new EntityNotFoundException(id);
 
             _repository.Remove(isExistEntity);
+
+            return ResponseDto<NoDataDto>.SuccessNoData(204);
+
         }
 
-        public void Update(TDto dto,int id)
+        public ResponseDto<NoDataDto> Update(TDto dto,int id)
         {
             if (dto == null)
                 throw new ArgumentNullException(nameof(dto));
@@ -55,11 +63,13 @@ namespace InnovaStay.Business.Concrete
             var isExistEntity = _repository.GetByIdAsync(id).Result;
 
             if (isExistEntity == null)
-                throw new InvalidOperationException($"Entity with Id '{id}' not found.");
+                throw new EntityNotFoundException(id);
 
-            
             TEntity value = ObjectMapper.Mapper.Map<TEntity>(dto);
             _repository.Update(value);
+
+            return ResponseDto<NoDataDto>.SuccessNoData(204);
+
 
         }
     }
