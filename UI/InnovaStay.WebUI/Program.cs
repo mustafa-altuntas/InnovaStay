@@ -40,11 +40,10 @@ app.UseRouting();
 app.UseAuthorization();
 
 // Add Admin Area route
-app.MapControllerRoute(
-    name:"admin",
-    pattern: "Admin/{controller=Staffs}/{action=Index}/{id?}",
-    defaults: new {area = "Admin"}
-);
+app.MapAreaControllerRoute(
+    name: "MyAreaAdmin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
 
 
 app.MapControllerRoute(
@@ -52,3 +51,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

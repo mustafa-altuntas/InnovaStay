@@ -53,7 +53,7 @@ namespace InnovaStay.Data.Repositories
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.OrderBy(x=>x.Id).ToListAsync();
         }
 
         public async Task<TEntity?> GetByIdAsync(int id)

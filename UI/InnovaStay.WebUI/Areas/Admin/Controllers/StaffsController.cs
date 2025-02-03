@@ -4,7 +4,6 @@ using InnovaStay.WebUI.Models.Staff;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;
-using System.Text.Json;
 
 namespace InnovaStay.WebUI.Areas.Admin.Controllers
 {
@@ -20,19 +19,26 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-            var client = await _httpClient.GetAsync(ApiConsumeUrlAddressConstants.Staff.GetAll);
+            var client = await _httpClient.GetAsync(ApiConsumeUrlAddressConstants.Staff.Get);
             client.EnsureSuccessStatusCode();
             var jsonData = await client.Content.ReadAsStringAsync();
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
 
             var response = JsonConvert.DeserializeObject<ResponseDto<List<StaffVM>>>(jsonData);
 
             return View(response?.Data);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var responseMessage = await _httpClient.GetAsync($"{ApiConsumeUrlAddressConstants.Staff.Get}/{id}");
+            if (responseMessage.StatusCode != HttpStatusCode.BadRequest)
+                responseMessage.EnsureSuccessStatusCode();
+
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var response = JsonConvert.DeserializeObject<ResponseDto<UpdateStaffVM>>(jsonData);
+
+            return View(response!.Data);
         }
 
         [HttpGet]
@@ -44,14 +50,12 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateStaffVM model)
         {
-            var responseMessage = await _httpClient.PostAsJsonAsync(ApiConsumeUrlAddressConstants.Staff.GetAll, model);
-
+            var responseMessage = await _httpClient.PostAsJsonAsync(ApiConsumeUrlAddressConstants.Staff.Create, model);
 
             if (responseMessage.StatusCode != HttpStatusCode.BadRequest)
                 responseMessage.EnsureSuccessStatusCode(); // Eğer yanıt bir hata kodu içeriyorsa (ör. 404 Not Found, 500 Internal Server Error), şu şekilde bir HttpRequestException fırlatır: Exception mesajı, yanıt durum kodunu ve durum mesajını içerir.
 
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
-
 
             var response = JsonConvert.DeserializeObject<ResponseDto<List<StaffVM>>>(jsonData);
             if (!response.Successful)
@@ -82,6 +86,43 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
                 return BadRequest(new { myMessage = "Personel silinemedi" });
             }
 
+        }
+        
+        [HttpGet("/Admin/[controller]/[action]/{id}")]
+        public async Task<IActionResult> Update(int id)
+        {
+            var responseMessage = await _httpClient.GetAsync($"{ApiConsumeUrlAddressConstants.Staff.Get}/{id}");
+            if(responseMessage.StatusCode != HttpStatusCode.BadRequest)
+                responseMessage.EnsureSuccessStatusCode();
+
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var response = JsonConvert.DeserializeObject<ResponseDto<UpdateStaffVM>>(jsonData);
+
+            return View(response!.Data);
+        }
+
+        [HttpPost("/Admin/[controller]/[action]/{id}")]
+        public async Task<IActionResult> Update(int id, UpdateStaffVM model)
+        {
+            var responseMessage = await _httpClient.PutAsJsonAsync($"{ApiConsumeUrlAddressConstants.Staff.Update}/{id}", model);
+
+            if (responseMessage.StatusCode != HttpStatusCode.BadRequest)
+                responseMessage.EnsureSuccessStatusCode(); // Eğer yanıt bir hata kodu içeriyorsa (ör. 404 Not Found, 500 Internal Server Error), şu şekilde bir HttpRequestException fırlatır: Exception mesajı, yanıt durum kodunu ve durum mesajını içerir
+
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var response = JsonConvert.DeserializeObject<ResponseDto<string>>(jsonData);
+            if (!response.Successful)
+            {
+                foreach (var error in response.Errors)
+                    ModelState.AddModelError("", error);
+
+
+                TempData["FailMessage"] = "Personel güncellenemedi";
+                return View(response?.Data);
+            }
+
+            TempData["SuccessMessage"] = "Personel başarıyle güncellendi";
+            return RedirectToAction("Index","Staffs");
         }
 
 
