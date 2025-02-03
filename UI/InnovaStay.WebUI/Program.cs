@@ -7,6 +7,18 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddHttpClient();
 
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddDefaultPolicy(
+//        policy =>
+//        {
+//            policy
+//            .AllowAnyOrigin()
+//            .AllowAnyHeader()
+//            .AllowAnyMethod();
+//        });
+//});
+
 
 var app = builder.Build();
 
@@ -23,12 +35,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//app.UseCors();
+
 app.UseAuthorization();
 
 // Add Admin Area route
 app.MapControllerRoute(
     name:"admin",
-    pattern: "Admin/{controller=Home}/{action=Index}/{id?}",
+    pattern: "Admin/{controller=Staffs}/{action=Index}/{id?}",
     defaults: new {area = "Admin"}
 );
 

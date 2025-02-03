@@ -52,10 +52,6 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
 
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
 
             var response = JsonConvert.DeserializeObject<ResponseDto<List<StaffVM>>>(jsonData);
             if (!response.Successful)
@@ -70,6 +66,22 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
 
             TempData["SuccessMessage"] = "Personel başarıyle eklendi";
             return Redirect("Index");
+        }
+
+        [HttpDelete("/Admin/[controller]/[action]/{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var responseMessage = await _httpClient.DeleteAsync($"{ApiConsumeUrlAddressConstants.Staff.Delete}/{id}");
+            try
+            {
+                responseMessage.EnsureSuccessStatusCode();
+                return Ok(new { myMessage = "Personel başarıyle silindi" });
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { myMessage = "Personel silinemedi" });
+            }
+
         }
 
 

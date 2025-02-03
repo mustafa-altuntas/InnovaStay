@@ -8,28 +8,71 @@
 
 
 @section Header {
-    @* <link href="~/adminweb/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet"> *@
+    @* <link href="~/adminweb/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" /> *@
 
 }
 
 @section Scripts {
 
-    @*     <script src="~/adminweb/plugins/tables/js/jquery.dataTables.min.js"></script>
-    <script src="~/adminweb/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-    <script src="~/adminweb/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
- *@
-    @*
-    <script>
-        $(document).ready(function () {
-            // DataTable'ı başlatıyoruz
-            $('#myTable').DataTable({
-                "paging": true, // Sayfalama
-                "searching": true, // Arama
-                "ordering": true, // Sıralama
-                "info": true // Bilgi gösterimi
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <script>
+                 const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+          },
+          buttonsStyling: false
+        });
+
+                document.querySelectorAll('.sweet-delete').forEach(button => {
+            button.addEventListener('click', function () {
+                var recordId = this.getAttribute("data-record-id");
+
+                swalWithBootstrapButtons.fire({
+                title: `${recordId} ID'li bu kaydı silmek istediğinize emin misiniz?`,
+                            text: "Bu işlem geri alınamaz!",
+                            showCancelButton: true,
+                            icon: "warning",
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Evet, sil!',
+                            cancelButtonText: 'İptal',
+                            reverseButtons: true
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch(`/Admin/Staffs/Delete/${recordId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (response.ok) {
+                                let data = await response.json();
+                                swalWithBootstrapButtons.fire("Silindi!", data.myMessage, "success").then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                let errorData = await response.json();
+                                swalWithBootstrapButtons.fire("Hata!", errorData.message || "Bilinmeyen bir hata oluştu.", "error");
+                            }
+                        } catch (error) {
+                            swalWithBootstrapButtons.fire("Hata!", "Sunucuya bağlanırken bir hata oluştu.", "error");
+                        }
+                    } else {
+                        swalWithBootstrapButtons.fire("İptal edildi", "Kayıt silinmedi :)", "info");
+                    }
+                });
             });
         });
-    </script> *@
+
+    </script>
+ 
+ 
+
 
 }
 
@@ -67,10 +110,10 @@
                             <a href="#" data-toggle="tooltip" data-placement="top" title="Sil">
                                 <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/edit.png" />
                             </a>
-                            <a class="ml-3" href="#" data-toggle="tooltip" data-placement="top" title="Güncelle">
+                            <a class="ml-3 sweet-delete" data-record-id="@item.Id" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Sil">
                                 <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/bin.png" />
                             </a>
-                            <a class="ml-3" href="#" data-toggle="tooltip" data-placement="top" title="Detay">
+                            <a class="ml-3" href="/Admin/Staffs/Detail" data-toggle="tooltip" data-placement="top" title="Detay">
                                 <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/file-1.png" />
                             </a>
                         </div>
