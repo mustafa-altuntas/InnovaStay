@@ -1,6 +1,6 @@
 ﻿using InnovaStay.WebUI.Constant;
 using InnovaStay.WebUI.Models.DTOs;
-using InnovaStay.WebUI.Models.Staff;
+using InnovaStay.WebUI.Models.Service;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;
@@ -8,34 +8,35 @@ using System.Net;
 namespace InnovaStay.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class StaffsController : Controller
+    public class ServiceController : Controller
     {
+
         private readonly HttpClient _httpClient;
 
-        public StaffsController(IHttpClientFactory httpClientFactory)
+        public ServiceController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient();
         }
 
         public async Task<IActionResult> Index()
         {
-            var client = await _httpClient.GetAsync(ApiConsumeUrlAddressConstants.Staff.Get);
+            var client = await _httpClient.GetAsync(ApiConsumeUrlAddressConstants.Service.Get);
             client.EnsureSuccessStatusCode();
             var jsonData = await client.Content.ReadAsStringAsync();
 
-            var response = JsonConvert.DeserializeObject<ResponseDto<List<StaffVM>>>(jsonData);
+            var response = JsonConvert.DeserializeObject<ResponseDto<List<ServiceVM>>>(jsonData);
 
             return View(response?.Data);
         }
 
         public async Task<IActionResult> Detail(int id)
         {
-            var responseMessage = await _httpClient.GetAsync($"{ApiConsumeUrlAddressConstants.Staff.Get}/{id}");
+            var responseMessage = await _httpClient.GetAsync($"{ApiConsumeUrlAddressConstants.Service.Get}/{id}");
             if (responseMessage.StatusCode != HttpStatusCode.BadRequest)
                 responseMessage.EnsureSuccessStatusCode();
 
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<ResponseDto<DetailStaffVM>>(jsonData);
+            var response = JsonConvert.DeserializeObject<ResponseDto<DetailServiceVM>>(jsonData);
 
             return View(response!.Data);
         }
@@ -48,16 +49,16 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateStaffVM model)
+        public async Task<IActionResult> Create(CreateServiceVM model)
         {
-            var responseMessage = await _httpClient.PostAsJsonAsync(ApiConsumeUrlAddressConstants.Staff.Create, model);
+            var responseMessage = await _httpClient.PostAsJsonAsync(ApiConsumeUrlAddressConstants.Service.Create, model);
 
             if (responseMessage.StatusCode != HttpStatusCode.BadRequest)
                 responseMessage.EnsureSuccessStatusCode(); // Eğer yanıt bir hata kodu içeriyorsa (ör. 404 Not Found, 500 Internal Server Error), şu şekilde bir HttpRequestException fırlatır: Exception mesajı, yanıt durum kodunu ve durum mesajını içerir.
 
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
 
-            var response = JsonConvert.DeserializeObject<ResponseDto<List<StaffVM>>>(jsonData);
+            var response = JsonConvert.DeserializeObject<ResponseDto<List<ServiceVM>>>(jsonData);
             if (!response.Successful)
             {
                 foreach (var error in response.Errors)
@@ -74,7 +75,7 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(string id)
         {
-            var responseMessage = await _httpClient.DeleteAsync($"{ApiConsumeUrlAddressConstants.Staff.Delete}/{id}");
+            var responseMessage = await _httpClient.DeleteAsync($"{ApiConsumeUrlAddressConstants.Service.Delete}/{id}");
             try
             {
                 responseMessage.EnsureSuccessStatusCode();
@@ -86,24 +87,24 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
             }
 
         }
-        
+
         public async Task<IActionResult> Update(int id)
         {
-            var responseMessage = await _httpClient.GetAsync($"{ApiConsumeUrlAddressConstants.Staff.Get}/{id}");
-            if(responseMessage.StatusCode != HttpStatusCode.BadRequest)
+            var responseMessage = await _httpClient.GetAsync($"{ApiConsumeUrlAddressConstants.Service.Get}/{id}");
+            if (responseMessage.StatusCode != HttpStatusCode.BadRequest)
                 responseMessage.EnsureSuccessStatusCode();
 
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<ResponseDto<UpdateStaffVM>>(jsonData);
+            var response = JsonConvert.DeserializeObject<ResponseDto<UpdateServiceVM>>(jsonData);
 
             return View(response!.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, UpdateStaffVM model)
+        public async Task<IActionResult> Update(int id, UpdateServiceVM model)
         {
-            var responseMessage = await _httpClient.PutAsJsonAsync($"{ApiConsumeUrlAddressConstants.Staff.Update}/{id}", model);
+            var responseMessage = await _httpClient.PutAsJsonAsync($"{ApiConsumeUrlAddressConstants.Service.Update}/{id}", model);
 
             if (responseMessage.StatusCode != HttpStatusCode.BadRequest)
                 responseMessage.EnsureSuccessStatusCode(); // Eğer yanıt bir hata kodu içeriyorsa (ör. 404 Not Found, 500 Internal Server Error), şu şekilde bir HttpRequestException fırlatır: Exception mesajı, yanıt durum kodunu ve durum mesajını içerir
@@ -121,9 +122,8 @@ namespace InnovaStay.WebUI.Areas.Admin.Controllers
             }
 
             TempData["SuccessMessage"] = "Personel başarıyle güncellendi";
-            return RedirectToAction("Index","Staffs");
+            return RedirectToAction("Index", "Service");
         }
-
 
     }
 }

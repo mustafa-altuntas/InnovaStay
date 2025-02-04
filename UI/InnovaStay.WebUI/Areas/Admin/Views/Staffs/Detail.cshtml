@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
+}
+
+@model DetailStaffVM
+
+
+<div class="row">
+    <div class="col-lg-8 col-xl-8">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center mb-4">
+                    <img class="mr-3" src="~/adminweb/images/avatar/11.png" width="80" height="80" alt="">
+                    <div class="media-body">
+                        <h3 class="mb-0">@Model.Name</h3>
+                        <p class="text-muted mb-0">@Model.Title</p>
+                    </div>
+                </div>
+
+
+
+                <h4>Hakkında</h4>
+                <p class="text-muted"> .... </p>
+                <ul class="card-profile__info">
+                    <li class="mb-1"><strong class="text-dark mr-4">Sosyal Medya 1:</strong> <span>@Model.SocialMedia1</span></li>
+                    <li class="mb-1"><strong class="text-dark mr-4">Sosyal Medya 2:</strong> <span>@Model.SocialMedia2</span></li>
+                    <li class="mb-1"><strong class="text-dark mr-4">Sosyal Medya 3:</strong> <span>@Model.SocialMedia3</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+</div>

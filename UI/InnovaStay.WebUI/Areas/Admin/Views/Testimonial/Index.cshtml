@@ -1,23 +1,18 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
 }
-@model List<StaffVM>
-
-
-
-
-@section Header {
-    @* <link href="~/adminweb/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" /> *@
-
-}
+ 
+@model List<TestimonialVM>
+ 
 
 @section Scripts {
 
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-     <script>
+    <script>
                  const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
             confirmButton: "btn btn-success",
@@ -43,7 +38,7 @@
                 }).then(async (result) => {
                     if (result.isConfirmed) {
                         try {
-                            const response = await fetch(`/Admin/Staffs/Delete/${recordId}`, {
+                            const response = await fetch(`/Admin/Testimonial/Delete/${recordId}`, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -70,8 +65,8 @@
         });
 
     </script>
- 
- 
+
+
 
 
 }
@@ -81,9 +76,9 @@
 
 
 <h4 class="card-title">Data Table</h4>
-<a href="/Admin/Staffs/Create" class="btn mb-3 btn-primary text-white">
+<a href="/Admin/Testimonial/Create" class="btn mb-3 btn-primary text-white">
     <i class="fa fa-plus" aria-hidden="true"></i>
-    Yeni Personel Oluştur
+    Yeni Referans Oluştur
 </a>
 
 <div class="table-responsive">
@@ -91,9 +86,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Title</th>
-                <th>İşlemler</th>
+                <th>Ad</th>
+                <th>Başlık</th>
+                <th>Açıklama</th>
+                <th>Fotoğraf Url</th>
             </tr>
         </thead>
         <tbody>
@@ -105,20 +101,21 @@
                     <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.Image</td>
                     <td>
                         <div class="d-flex ">
-                            <a href="/Admin/Staffs/Update/@item.Id" data-toggle="tooltip" data-placement="top" title="Gümcelle">
+                            <a href="/Admin/Testimonial/Update/@item.Id" data-toggle="tooltip" data-placement="top" title="Gümcelle">
                                 <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/edit.png" />
                             </a>
                             <a class="ml-3 sweet-delete" data-record-id="@item.Id" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Sil">
                                 <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/bin.png" />
                             </a>
-                            <a class="ml-3" href="/Admin/Staffs/Detail/@item.Id" data-toggle="tooltip" data-placement="top" title="Detay">
+                            <a class="ml-3" href="/Admin/Testimonial/Detail/@item.Id" data-toggle="tooltip" data-placement="top" title="Detay">
                                 <img style="height: 30px;" class="img-fluid" src="~/adminweb/images/icon/file-1.png" />
                             </a>
                         </div>
                     </td>
-
 
 
                 </tr>
@@ -128,10 +125,10 @@
         <tfoot>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Title</th>
-                <th>İşlemler</th>
-
+                <th>Ad</th>
+                <th>Başlık</th>
+                <th>Açıklama</th>
+                <th>Fotoğraf Url</th>
             </tr>
         </tfoot>
     </table>

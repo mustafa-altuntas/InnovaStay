@@ -1,8 +1,6 @@
-﻿using InnovaStay.Entity.Abstract;
-
-namespace InnovaStay.Entity.Concrete
+﻿namespace InnovaStay.WebUI.Models.Testimonial
 {
-    public class Testimonial : IBaseEntity
+    public class TestimonialVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -10,4 +8,5 @@ namespace InnovaStay.Entity.Concrete
         public string Description { get; set; }
         public string Image { get; set; }
     }
+
 }

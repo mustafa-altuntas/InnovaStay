@@ -1,13 +1,8 @@
 using InnovaStay.Api.Extension;
-using InnovaStay.Api.Filters;
 using InnovaStay.Business.Abstract;
 using InnovaStay.Business.Concrete;
 using InnovaStay.Data;
-using InnovaStay.Data.Abstract;
-using InnovaStay.Data.Concrete;
-using InnovaStay.Data.Repositories;
 using InnovaStay.Dto.Dtos;
-using InnovaStay.Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
+}
+
+@model DetailServiceVM
+
+
+<div class="row">
+    <div class="col-lg-8 col-xl-8">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center mb-4">
+                    <img class="mr-3" src="~/adminweb/images/avatar/@Model.ServiceIcon" width="80" height="80" alt="">
+                    <div class="media-body">
+                        <h3 class="mb-0">@Model.Title</h3>
+                    </div>
+                </div>
+
+
+
+                <h4>Açıklama</h4>
+                <p class="text-muted"> @Model.Description </p>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

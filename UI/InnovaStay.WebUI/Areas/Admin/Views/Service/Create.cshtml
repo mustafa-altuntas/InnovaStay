@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
+}
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
+}
+
+@model CreateServiceVM
+
+<div class="card-body">
+    <h4 class="card-title">Yeni Servis Oluştur</h4>
+    <div class="basic-form">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ServiceIcon"></label>
+                    <input asp-for="ServiceIcon" class="form-control">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Kaydet</button>
+        </form>
+    </div>
+</div>
+
