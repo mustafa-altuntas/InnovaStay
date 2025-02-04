@@ -27,4 +27,9 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\API\InnovaStay.Data\InnovaStay.Data.csproj" />
+    <ProjectReference Include="..\..\API\InnovaStay.Entity\InnovaStay.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

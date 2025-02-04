@@ -1,3 +1,7 @@
+using InnovaStay.Data.Concrete;
+using InnovaStay.Entity.Concrete.Identities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +22,27 @@ builder.Services.AddHttpClient();
 //            .AllowAnyMethod();
 //        });
 //});
+
+
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreDb")));
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+{
+    // Password settings.
+    options.Password.RequiredLength = 1;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredUniqueChars = 0;
+
+    options.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<AppDbContext>();
+
+
+
+
+
 
 
 var app = builder.Build();
