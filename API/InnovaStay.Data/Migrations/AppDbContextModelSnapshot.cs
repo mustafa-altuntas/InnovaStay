@@ -22,6 +22,43 @@ namespace InnovaStay.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("InnovaStay.Entity.Concrete.About", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("CustomerCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RoomCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StaffCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title1")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title2")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("İsActive")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Abouts");
+                });
+
             modelBuilder.Entity("InnovaStay.Entity.Concrete.Identities.AppRole", b =>
                 {
                     b.Property<int>("Id")
