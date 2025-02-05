@@ -21,6 +21,7 @@ builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IStaffService, StaffService>();
 builder.Services.AddScoped<ISubscribeService, SubscribeService>();
 builder.Services.AddScoped<ITestimonialService, TestimonialService>();
+builder.Services.AddScoped<IAboutService, AboutService>();
 
 // Add Cors Policy
 builder.Services.AddCors(options =>

@@ -4,6 +4,8 @@ namespace InnovaStay.Data.Abstract
 {
     public interface IAboutRepository : IGenericRepository<About>
     {
-        Task<bool> MarkAsActivate(int id);
+        Task<bool> MarkAsActivateAsycn(int id);
+        Task<About?> GetByActiveAsync();
+
     }
 }

@@ -9,7 +9,7 @@ namespace InnovaStay.Business.Concrete
 {
     public class GenericService<TDto, TEntity> : IGenericService<TDto, TEntity> where TDto : class where TEntity : class, IBaseEntity
     {
-        private readonly IGenericRepository<TEntity> _repository;
+        protected readonly IGenericRepository<TEntity> _repository;
 
         public GenericService(IGenericRepository<TEntity> repository)
         {

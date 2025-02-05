@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/_AdminLayout/Index.cshtml";
+}
+
+@model UpdateAboutVM
+
+
+
+@section Header {
+    @* <link href="~/adminweb/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet"> *@
+}
+
+@section Scripts {
+    @*
+        <script src="~/adminweb/plugins/tables/js/jquery.dataTables.min.js"></script>
+    *@
+
+}
+
+
+
+
+<div class="card-body">
+    <h4 class="card-title">Hakkımızda Bilgisi Güncelle</h4>
+    <div class="basic-form">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Title1"></label>
+                    <input asp-for="Title1" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Title2"></label>
+                    <input asp-for="Title2" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Content"></label>
+                    <input asp-for="Content" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="RoomCount"></label>
+                    <input asp-for="RoomCount" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="StaffCount"></label>
+                    <input asp-for="StaffCount" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="CustomerCount"></label>
+                    <input asp-for="CustomerCount" class="form-control">
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-dark">Kaydet</button>
+        </form>
+    </div>
+</div>

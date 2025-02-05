@@ -32,6 +32,8 @@ namespace InnovaStay.Data
             services.AddScoped<IStaffRepository, StaffRepository>();
             services.AddScoped<ISubscribeRepository, SubscribeRepository>();
             services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+            services.AddScoped<IAboutRepository, AboutRepository>();
+
 
 
             //Microsoft.AspNetCore.Identity

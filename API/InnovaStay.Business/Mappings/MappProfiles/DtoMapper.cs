@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using InnovaStay.Dto.Dtos.About;
 using InnovaStay.Dto.Dtos.Room;
 using InnovaStay.Dto.Dtos.Service;
 using InnovaStay.Dto.Dtos.Staff;
@@ -22,6 +23,7 @@ namespace InnovaStay.Business.Mappings.MappProfiles
             CreateMap<StaffDto, Staff>().ReverseMap();
             CreateMap<SubscribeDto, Subscribe>().ReverseMap();
             CreateMap<TestimonialDto, Testimonial>().ReverseMap();
+            CreateMap<AboutDto, About>().ReverseMap();
         }
     }
 }

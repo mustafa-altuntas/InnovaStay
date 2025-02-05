@@ -23,5 +23,14 @@
             public const string Create = "https://localhost:7095/api/Service";
             public const string Update = "https://localhost:7095/api/Service";
         }
+        public static class About
+        {
+            public const string Get = "https://localhost:7095/api/About";
+            public const string Delete = "https://localhost:7095/api/About";
+            public const string Create = "https://localhost:7095/api/About";
+            public const string Update = "https://localhost:7095/api/About";
+            public const string GetByActive = "https://localhost:7095/api/About/GetByActive";
+            public const string MakeAsActive = "https://localhost:7095/api/About/MakeAsActive";
+        }
     }
 }
